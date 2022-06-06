@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import Form from "./components/form.jsx"
+import Card from "./components/card.jsx"
+import { useState } from 'react';
+
+const initialInfo = {
+  cardHolder: "",
+  cardNumber:"",
+  expMonth: "",
+  expYear: "",
+  cvc: ""
+}
 
 function App() {
+  const [info, setInfo] = useState(initialInfo)
+
+  const handleChange = ((e)=>setInfo((prev)=>({...prev,[e.target.name]:e.target.value})))
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Card info={info} />
+      <Form info={info} setInfo={setInfo} handleChange={handleChange}/>
     </div>
   );
 }
